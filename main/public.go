@@ -47,7 +47,7 @@ func main() {
 	Migrate(db)
 
 	router := setupRouter()
-	router.Run(":8080")
+	router.Run()
 }
 
 func setupRouter() *gin.Engine {
