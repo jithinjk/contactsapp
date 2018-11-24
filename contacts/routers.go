@@ -26,11 +26,16 @@ func GetContact(c *gin.Context, contactID string) {
 
 // GetAllContacts get people details
 func GetAllContacts(c *gin.Context) {
-	reqPage, err := strconv.Atoi(c.Query("page"))
+	pageQuery := c.Query("page")
+	reqPage, err := strconv.Atoi(pageQuery)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Invalid Page!"})
-		c.AbortWithStatus(404)
-		return
+		if pageQuery == "" {
+			reqPage = 1
+		} else {
+			c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Invalid Page!", "query": pageQuery})
+			c.AbortWithStatus(404)
+			return
+		}
 	}
 
 	totalCount, cerr := GetCount()

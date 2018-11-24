@@ -47,7 +47,7 @@ func GetCount() (int, error) {
 
 // GetTotalPageLimitOffset return limit and offset
 func GetTotalPageLimitOffset(page, totalCount int) (int, int, int) {
-	limit := 2
+	limit := 10
 	offset := (page - 1) * limit
 	totalPages := (totalCount / limit) + 1
 	return limit, offset, totalPages
