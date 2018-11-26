@@ -24,6 +24,28 @@ func GetContact(c *gin.Context, contactID string) {
 	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": contactModel})
 }
 
+// GetContactByName get contact by name
+func GetContactByName(c *gin.Context)  {
+	name:=c.Param("name")
+	contactNameModel, err := FindContact(&Contact{Name: name})
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No contact found with given name!"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": contactNameModel})
+}
+
+// GetContactByEmail get contact by name
+func GetContactByEmail(c *gin.Context)  {
+	email:=c.Param("email")
+	contactEmailModel, err := FindContact(&Contact{Email: email})
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "No contact found with given email!"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": contactEmailModel})
+}
+
 // GetAllContacts get people details
 func GetAllContacts(c *gin.Context) {
 	pageQuery := c.Query("page")

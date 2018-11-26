@@ -1,14 +1,14 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/jithinjk/plivoapp/common"
 	"github.com/jithinjk/plivoapp/contacts"
+	log "github.com/sirupsen/logrus"
 )
 
 // GetHandler handler for GET calls
@@ -35,6 +35,9 @@ func Migrate(db *gorm.DB) {
 func main() {
 	// open a db connection
 	db := common.Init()
+	if db != nil {
+		log.Println("DB init error")
+	}
 	defer db.Close()
 
 	log.Println("Connection Established...")
@@ -48,7 +51,7 @@ func main() {
 	Migrate(db)
 
 	router := setupRouter()
-	router.Run()
+	router.Run(":8080")
 }
 
 func setupRouter() *gin.Engine {
@@ -70,6 +73,8 @@ func setupRouter() *gin.Engine {
 	{
 		v1.GET("/contacts/:path1", GetHandler)        //      /v1/contacts/all
 		v1.GET("/contacts/:path1/:path2", GetHandler) //      /v1/contacts/<id>/details
+		v1.GET("/search/name/:name", contacts.GetContactByName) //      /v1/contacts/<id>/details
+		v1.GET("/search/email/:email", contacts.GetContactByEmail) //      /v1/contacts/<id>/details
 		v1.POST("/create", contacts.CreateContact)
 		v1.PUT("/update/:id", contacts.UpdateContact)
 		v1.DELETE("/delete/:id", contacts.DeleteContact)
@@ -83,5 +88,3 @@ func setupRouter() *gin.Engine {
 
 	return router
 }
-
-// search by name and email
