@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jithinjk/plivoapp/common"
+	"github.com/jithinjk/contactsapp/common"
 )
 
 // GetContact get contact

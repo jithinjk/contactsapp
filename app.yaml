@@ -1,4 +1,0 @@
-# [START runtime]
-runtime: go
-env: flex
-# [END runtime]

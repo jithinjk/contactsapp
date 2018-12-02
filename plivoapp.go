@@ -6,8 +6,8 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/jithinjk/plivoapp/common"
-	"github.com/jithinjk/plivoapp/contacts"
+	"github.com/jithinjk/contactsapp/common"
+	"github.com/jithinjk/contactsapp/contacts"
 	log "github.com/sirupsen/logrus"
 )
 

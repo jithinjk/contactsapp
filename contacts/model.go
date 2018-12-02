@@ -1,7 +1,7 @@
 package contacts
 
 import (
-	"github.com/jithinjk/plivoapp/common"
+	"github.com/jithinjk/contactsapp/common"
 )
 
 // Contact contact struct
